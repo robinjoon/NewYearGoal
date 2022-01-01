@@ -19,7 +19,7 @@
 <body class="vh-100" background="main_bg.jpg"
     style="background-size: auto 100vh; background-color: #caf2ff; background-repeat: no-repeat; background-position: right;" id="body">
     <div class="vh-100" style="display: inline-flex;" id="main">
-        <div class="w-100" style="opacity: 0.95; margin: auto; padding-left: 5vw; padding-right: 5vw;">
+        <div class="w-100" style="opacity: 0.95; margin: auto; padding-left: 5vw; padding-right: 5vw; font-size: 2vh;">
             <div class="jumbotron jumbotron-fluid" style="background-color: rgba(255, 255, 255, 0.2);">
                 <div class="container">
                     <h1 class="display-4">Happy New Year!</h1>
@@ -37,32 +37,32 @@
             </div>
             <div class="input-group mb-3 ">
                 <div class="input-group-prepend">
-                    <span class="input-group-text h-100" id="email-label">이메일</span>
+                    <span class="input-group-text h-100" id="email-label" style="font-size: 2vh;">이메일</span>
                 </div>
                 <input type="email" class="form-control" placeholder="example@example.com" aria-label="email"
-                    aria-describedby="email-label" id="email">
+                    aria-describedby="email-label" id="email" style="font-size: 2vh;">
                 <div class="input-group-prepend">
-                    <span class="input-group-text h-100" id="name-label">이름</span>
+                    <span class="input-group-text h-100" id="name-label" style="font-size: 2vh;">이름</span>
                 </div>
                 <input type="text" class="form-control" placeholder="홍길동" aria-label="name"
-                    aria-describedby="name-label" id="name" spellcheck="false" data-ms-editor="true">
+                    aria-describedby="name-label" id="name" spellcheck="false" data-ms-editor="true" style="font-size: 2vh;">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text h-100" id="goalText-label">목표(0)</span>
+                    <span class="input-group-text h-100" id="goalText-label" style="font-size: 2vh;">목표(0)</span>
                 </div>
                 <textarea class="form-control" placeholder="새해에는 꼭 다이어트를 할거야!" aria-label="goal"
-                    aria-describedby="goalText-label" rows="10" spellcheck="false" data-ms-editor="true" id="goalText" oninput="charLengthCheck();"></textarea>
+                    aria-describedby="goalText-label" rows="10" spellcheck="false" data-ms-editor="true" id="goalText" oninput="charLengthCheck();" style="font-size: 2vh;"></textarea>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text h-100" id="pw-label">비밀번호</span>
+                    <span class="input-group-text h-100" id="pw-label" style="font-size: 2vh;">비밀번호</span>
                 </div>
                 <input type="password" class="form-control" placeholder="pw" aria-label="pw" aria-describedby="pw-label"
-                    id="pw" spellcheck="false" data-ms-editor="true">
+                    id="pw" spellcheck="false" data-ms-editor="true" style="font-size: 2vh;">
             </div>
             <div class="input-group mb-3">
-                <button type="button" class="btn btn-primary w-100" onclick="clickSubmit();">전송</button>
+                <button type="button" class="btn btn-primary w-100" onclick="clickSubmit();" style="font-size: 2vh;">전송</button>
             </div>
         </div>
     </div>
@@ -84,7 +84,10 @@
         function charLengthCheck(e){
             let label = document.getElementById('goalText-label');
             let length = document.getElementById('goalText').value.length;
-            console.log(length);
+            if(length>200){
+                document.getElementById('goalText').value = document.getElementById('goalText').value.slice(0,200);
+                length = 200;
+            }
             label.innerText="목표("+length+"/200)"
         }
         window.addEventListener("keydown",charLengthCheck);
