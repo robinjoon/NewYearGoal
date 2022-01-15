@@ -2,7 +2,6 @@ package dto;
 
 import java.sql.Timestamp;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +14,7 @@ public class Goal {
 	@NonNull private String name;
 	@NonNull private String goalText;
 	@NonNull private String pw;
+	@NonNull private GoalDue due;
 	private Timestamp createTime;
 	public Goal() {}
 }
