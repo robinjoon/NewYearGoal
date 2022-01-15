@@ -14,7 +14,7 @@ public class GoalDao {
 	}
 	
 	public boolean insert(Goal goal) {
-		String sql = "insert into goals(email,name,goalText,knownText) values(?,?,?,?)";
+		String sql = "insert into goals(email,name,goalText,knownText,due) values(?,?,?,?,?)";
 		String pw = goal.getPw();
 		while(pw.length()<16) {
 			pw = pw + pw;
@@ -22,7 +22,7 @@ public class GoalDao {
 		try {
 			String knownText = AES256.encrypt(Goal.KNOWN, pw);
 			String goalText = AES256.encrypt(goal.getGoalText(), pw);
-			int result =  jdbcTemplate.update(sql,goal.getEmail(),goal.getName(),goalText,knownText);
+			int result =  jdbcTemplate.update(sql,goal.getEmail(),goal.getName(),goalText,knownText,goal.getDue().name());
 			if(result == 1) {
 				return true;
 			}else {
