@@ -48,7 +48,7 @@ public class GoalDao {
 		List<Goal> result = new ArrayList<Goal>();
 		String sql = "select * from goals where due = ?";
 		try {
-			jdbcTemplate.query(sql, new GoalRowMapper<Goal>(),due.name());
+			result = jdbcTemplate.query(sql, new GoalRowMapper<Goal>(),due.name());
 		}catch (DataAccessException e) {
 			result = new ArrayList<Goal>();
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class GoalDao {
 		List<Goal> result = new ArrayList<Goal>();
 		String sql = "select * from goals where email = ?";
 		try {
-			jdbcTemplate.query(sql, new GoalRowMapper<Goal>(),email);
+			result = jdbcTemplate.query(sql, new GoalRowMapper<Goal>(),email);
 		}catch (DataAccessException e) {
 			result = new ArrayList<Goal>();
 			e.printStackTrace();
