@@ -18,5 +18,7 @@ public class Goal {
 	@NonNull private GoalDue due;
 	@Setter
 	private Timestamp createTime;
+	@Setter
+	private boolean isAchieved;
 	public Goal() {}
 }
