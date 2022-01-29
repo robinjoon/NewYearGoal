@@ -81,7 +81,7 @@ public class GoalDao {
 				}
 			},year_start,year_end).get(0);
 		}catch (Exception e) {
-			count = 0;
+			count = -1;
 			e.printStackTrace();
 		}
 		return count;
@@ -91,7 +91,7 @@ public class GoalDao {
 		String year_start = year+"-01-01";
 		String year_end = year+"-12-31";
 		long count = 0;
-		String sql = "select count(email) from goals where (date(createTime) between ? and ?) and isAchieve = 1";
+		String sql = "select count(email) from goals where (date(createTime) between ? and ?) and isAchieved = 1";
 		try {
 			count = jdbcTemplate.query(sql, new RowMapper<Long>() {
 				@Override
@@ -100,7 +100,7 @@ public class GoalDao {
 				}
 			},year_start,year_end).get(0);
 		}catch (Exception e) {
-			count = 0;
+			count = -1;
 			e.printStackTrace();
 		}
 		return count;
@@ -116,6 +116,17 @@ public class GoalDao {
 			return false;
 		}
 	}
+	
+	public boolean canModify(String encryptedKnownText, String email, Timestamp createTime) { // 비밀번호 검증 로직.
+		String sql = "select knownText from goals where email =? and createTime =?";
+		String dbKnownText = jdbcTemplate.queryForObject(sql, new RowMapper<String>() {
+			@Override
+			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getString(1);
+			}
+		}, email,createTime);
+		return dbKnownText.equals(encryptedKnownText);
+	}
 
 	private class GoalRowMapper<T extends Goal> implements RowMapper<T> {
 		@Override
@@ -125,8 +136,10 @@ public class GoalDao {
 			String goalText = rs.getString("goalText");
 			GoalDue due = GoalDue.from(rs.getString("due"));
 			Timestamp createTime = rs.getTimestamp("createTime");
+			boolean isAchieved = rs.getBoolean("isAchieved");
 			Goal goal = new Goal(email, name, goalText, goalText, due);
 			goal.setCreateTime(createTime);
+			goal.setAchieved(isAchieved);
 			return (T) goal;
 		}
 	}
