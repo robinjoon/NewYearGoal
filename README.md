@@ -3,7 +3,6 @@ robinjoon/NewYearGoal
 2022년을 기념해 만든 신년 목표설정  시스템
 -------------
 
-https://www.robinjoon.xyz:4324/newyear/ 의 소스코드 입니다.<br>
 
 ## Usage
 ![image](https://user-images.githubusercontent.com/45223837/149436438-413a1f68-3c63-4382-914d-d99881a11db1.png)
